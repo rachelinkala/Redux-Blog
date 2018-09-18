@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogForm from './BlogForm';
 import BlogList from './BlogList';
-import logo from './logo.svg';
+import Footer from './Footer';
 import './App.css';
 
 const App = () => (
