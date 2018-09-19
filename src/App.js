@@ -1,7 +1,7 @@
 import React from 'react';
-import BlogForm from './BlogForm';
-import BlogList from './BlogList';
-import Footer from './Footer';
+import BlogForm from './components/BlogForm';
+import BlogList from './components/BlogList';
+import Footer from './components/Footer';
 import './App.css';
 
 const App = () => (

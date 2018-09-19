@@ -1,20 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+
 class BlogForm extends React.Component {
   state = { title: '', content: '' }
   
   handleSubmit = (e) => {
     e.preventDefault()
-    const { dispatch } = this.props
-    const { title } = this.state.title
-    const { content } = this.state.content
-    dispatch({ type: 'CREATE_BLOG', blog: title, blog: content })
+    const { dispatch, id } = this.props
+    const { title, content } = this.state
+    const blog = { title, content, id, complete: false }
+    dispatch({ type: 'ADD_BLOG', blog })
+    dispatch({ type: 'INC_ID' })
     this.setState({ title: '', content: ''})
   }
 
   handleChange = (e) => {
-    this.setState({ title: e.target.value, content: e.target.value})
+    const { name, value } = e.target
+    this.setState({ [name]: value })
   }
 
   render() {
@@ -25,12 +28,29 @@ class BlogForm extends React.Component {
       <div>
         <h3>Create A New Blog</h3>
         <form onSubmit={this.handleSubmit}>
-          <input value={title} onChange={this.handleChange} />
-          <input value={content} onChange={this.handleChange} />
+          <input 
+            name="title"
+            value={title} 
+            placeholder="Title" 
+            onChange={this.handleChange} 
+            required 
+          />
+          <input 
+            value={content} 
+            name="content"
+            placeholder="Content" 
+            onChange={this.handleChange} 
+            required 
+          />
+          <button onSubmit={this.handleSubmit}>Submit</button>
         </form>
       </div>
     )
   }
 }
 
-export default connect()(BlogForm);
+const mapStateToProps = (state) => {
+  return { id: state.nextId}
+}
+
+export default connect(mapStateToProps)(BlogForm);

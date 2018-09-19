@@ -2,9 +2,11 @@ const blogs = ( state = [], action ) => {
   switch(action.type) {
     case 'BLOGS':
       return action.blogs
-    case 'CREATE_BLOG':
+    case 'ADD_BLOG':
       return [action.blog, ...state];
-    default:
+    // case 'DELETE_BLOG':
+    //   return state.filter( => t.id !== action.id)
+    // default:
       return state
   }
 }
